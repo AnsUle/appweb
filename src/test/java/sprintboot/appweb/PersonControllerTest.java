@@ -1,3 +1,5 @@
+package sprintboot.appweb;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,6 +25,6 @@ public class PersonControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
-                .andExpect(MockMvcResultMatchers.content().string(containsString("john")));
+                .andExpect(MockMvcResultMatchers.content().string(containsString("Thor")));
     }
 }
