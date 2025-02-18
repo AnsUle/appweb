@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://url.de.ton.repository.git'  // URL de ton repo Git
+                git 'https://github.com/AnsUle/appweb.git'  // URL de ton repo Git
             }
         }
 
