@@ -35,7 +35,7 @@ pipeline {
                 script {
                     // Connexion à Docker Hub et envoie de l'image
                     withDockerRegistry([credentialsId: env.DOCKER_HUB_CREDENTIALS, url: '']) {
-                        sh 'docker push ton_docker_hub_username/appweb:latest'
+                        sh 'louvea/appweb:latest'
                     }
                 }
             }
