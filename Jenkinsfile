@@ -33,7 +33,7 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    // Connexion à Docker Hub et push de l'image
+                    // Connexion à Docker Hub et envoie de l'image
                     withDockerRegistry([credentialsId: env.DOCKER_HUB_CREDENTIALS, url: '']) {
                         sh 'docker push ton_docker_hub_username/appweb:latest'
                     }
