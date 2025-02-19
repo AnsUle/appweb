@@ -6,6 +6,13 @@ pipeline {
     }
 
     stages {
+
+        stage('cleanWS')  {
+            steps {
+                cleanWS()
+            }
+        }
+
         stage('Checkout') {
             steps {
                 git 'https://github.com/AnsUle/appweb.git'  // URL de ton repo Git
