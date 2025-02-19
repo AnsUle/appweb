@@ -46,8 +46,10 @@ services:
       - api
     image: louvea/appweb
     container_name: app
+    environment:
+      - sprintboot.appweb.apiUrl=http://api:9000
     ports:
-      - "8080:80"
+      - "8080:9001"
 
 
 
