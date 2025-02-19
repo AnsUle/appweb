@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/AppWeb-0.0.1-SNAPSHOT.jar app.jar
 
 # Exposer le port sur lequel l'application va tourner
-EXPOSE 8080
+EXPOSE 9090
 
 # Commande pour exécuter l'application
 ENTRYPOINT ["java", "-jar", "app.jar"]
