@@ -25,9 +25,20 @@ pipeline {
             steps {
                 script {
                     // Étape de build de l'image Docker
-                    sh 'docker build -t ton_docker_hub_username/appweb:latest .'
+                    docker.build("${louvea/appweb}:${latest}")
                 }
             }
+        }
+
+        //deploiement du multi containeur avec docker compose
+        stage('Deploy with Docker compose'){
+                  steps{
+                  //initialise le conteneur docker
+                    script{
+                    // construit les services
+                    sh 'docker-compose up -d --build --force-recreate --remove-orphans'
+                  }
+               }
         }
 
         stage('Push to Docker Hub') {
