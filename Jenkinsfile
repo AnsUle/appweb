@@ -14,7 +14,11 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/AnsUle/appweb.git'  // URL de ton repo Git
+                script {
+                    git branch: 'main'
+                    credentials: 'jenkins'
+                    url: 'https://github.com/AnsUle/appweb.git'  // URL de ton repo Git
+                }
             }
         }
 
