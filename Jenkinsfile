@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'MAVEN'
+        jdk 'JDK21'
+    }
+
     environment {
         DOCKER_HUB_CREDENTIALS = 'docker-hub-credentials' // Remplace par tes identifiants Docker Hub dans Jenkins
     }
