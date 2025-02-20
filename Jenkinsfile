@@ -15,9 +15,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: 'main'
-                    credentials: 'jenkins'
-                    url: 'https://github.com/AnsUle/appweb.git'  // URL de ton repo Git
+                    git branch: 'main', credentialsId: 'jenkins', url: 'https://github.com/AnsUle/appweb.git'
                 }
             }
         }
@@ -25,7 +23,6 @@ pipeline {
         stage('Build JAR') {
             steps {
                 script {
-                    // Étape de build du JAR avec Maven
                     sh 'mvn clean package'
                 }
             }
@@ -34,29 +31,28 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Étape de build de l'image Docker
-                    docker.build("${louvea/appweb}:${latest}")
+                    docker.withRegistry('', env.DOCKER_HUB_CREDENTIALS) {
+                        docker.build("louvea/appweb:latest")
+                    }
                 }
             }
-        }
-
-        //deploiement du multi containeur avec docker compose
-        stage('Deploy with Docker compose'){
-                  steps{
-                  //initialise le conteneur docker
-                    script{
-                    // construit les services
-                    sh 'docker-compose up -d --build --force-recreate --remove-orphans'
-                  }
-               }
         }
 
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    // Connexion à Docker Hub et envoie de l'image
                     withDockerRegistry([credentialsId: env.DOCKER_HUB_CREDENTIALS, url: '']) {
-                        sh 'louvea/appweb:latest'
+                        sh 'docker push louvea/appweb:latest'
+                    }
+                }
+            }
+        }
+
+        stage('Deploy with Docker compose') {
+            steps {
+                script {
+                    withDockerRegistry([credentialsId: env.DOCKER_HUB_CREDENTIALS, url: '']) {
+                        sh 'docker-compose up -d --build --force-recreate --remove-orphans'
                     }
                 }
             }
