@@ -2,13 +2,14 @@ name: cicd_application_web_api
 
 services:
   mysql:
-    build: ./infra/
+    #build: ./infra/
+    image: mysql:latest
     container_name: mysql
     volumes:
       # creation d'un volume de persistance
       - ./infra/data:/var/lib/mysql
       # creation d'un volume pour la creation de la BDD
-      - ./infra/dump:/docker-entrypoint-initdb.d/
+      - ./infra/dump/init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: always
     ports:
       - 3396:3306
