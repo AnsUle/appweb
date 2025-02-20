@@ -38,5 +38,13 @@ pipeline {
                 }
             }
         }
+
+        stage('Push to Docker hub') {
+            script {
+                docker.withRegistry('', DOCKER_HUB_CREDENTIALS) {
+                    docker.image('louvea/appweb:latest').push()
+                }
+            }
+        }
     }
 }
