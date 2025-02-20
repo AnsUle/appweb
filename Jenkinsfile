@@ -41,7 +41,7 @@ pipeline {
 
         stage('Push to Docker hub') {
             script {
-                docker.withRegistry('', DOCKER_HUB_CREDENTIALS) {
+                docker.withRegistry('', docker-hub-credentials) {
                     docker.image('louvea/appweb:latest').push()
                 }
             }
