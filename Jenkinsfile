@@ -6,6 +6,13 @@ pipeline {
     }
 
     stages {
+        stage('cleanWS') {
+            script {
+                cleanWs()
+            }
+        }
+
+
         stage('Checkout') {
             steps {
                 script {
