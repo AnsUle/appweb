@@ -12,11 +12,24 @@ pipeline {
             }
         }
 
-
         stage('Checkout') {
             steps {
                 script {
                     checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'jenkins', url: 'https://github.com/AnsUle/appweb.git']])
+                }
+            }
+        }
+
+        stage('build Maven') {
+            steps {
+                bat 'mvn clean package'
+            }
+        }
+
+        stage ('Build Docker Image') {
+            steps {
+                script {
+                    docker.build('louvea/appweb:latest', '-f Dockerfile .')
                 }
             }
         }
