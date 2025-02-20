@@ -15,7 +15,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: 'main', credentialsId: 'jenkins', url: 'https://github.com/AnsUle/appweb.git'
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'jenkins', url: 'https://github.com/AnsUle/appweb.git']])
                 }
             }
         }
