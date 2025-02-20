@@ -14,8 +14,8 @@ services:
     ports:
       - 3396:3306
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: springboot
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
 
   api:
     image: louvea/api:latest
@@ -25,8 +25,8 @@ services:
     restart: always
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/springboot?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.MySQL8Dialect
     ports:
       - "9010:9000"
@@ -39,8 +39,8 @@ services:
       - "8090:80"
     restart: always
     environment:
-      PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
 
   app:
     depends_on:
