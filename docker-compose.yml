@@ -28,7 +28,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.MySQL8Dialect
     ports:
-      - "9000:9000"
+      - "9010:9000"
 
   phpMyAdmin:
     depends_on:
