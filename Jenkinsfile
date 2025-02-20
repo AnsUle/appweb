@@ -7,7 +7,7 @@ pipeline {
 
     stages {
         stage('cleanWS') {
-            script {
+            steps {
                 cleanWs()
             }
         }
